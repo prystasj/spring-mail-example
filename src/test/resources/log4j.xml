@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+    <appender name="asynch" class="org.apache.log4j.AsyncAppender">
+        <appender-ref ref="file" />
+    </appender>
+
+    <appender name="file" class="org.apache.log4j.FileAppender">
+        <param name="file" value="target/tests.log"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{dd/MM/yyyy HH:mm:ss.SSS} %-5p %t %c - %m%n"/>
+        </layout>
+    </appender>
+
+    <logger name="prystasj.spring.mail">
+        <level value="debug"/>
+    </logger>
+
+    <logger name="org.springframework">
+        <level value="warn"/>
+    </logger>
+
+    <root>
+        <priority value="error"/>
+        <appender-ref ref="asynch"/>
+    </root>
+
+</log4j:configuration>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- update the properties below before running the test -->
+    <bean class="prystasj.spring.mail.EmailSender">
+        <property name="defaultFromAddress" value="prystasj@oprystasj.org"/>
+        <property name="toAddress" value="prystasj@oprystasj.org"/>
+        <property name="mailHost" value="localhost"/>
+        <property name="mailPort" value="25"/>
+    </bean>
+
+    <bean id="emailTextResource" class="org.springframework.core.io.ClassPathResource">
+        <constructor-arg value="email.html"/>
+    </bean>
+
+</beans>
