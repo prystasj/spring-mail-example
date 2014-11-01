@@ -14,7 +14,6 @@ class EmailSenderSpec extends Specification {
     String mailHost = 'mailhost.org'
     int mailPort = 25
 
-    String defaultFromAddress = 'sender@prystasj.org'
     String fromAddress = 'specs@prystasj.org'
     String toAddress = 'friend@prystasj.org'
 
@@ -24,29 +23,12 @@ class EmailSenderSpec extends Specification {
     EmailSender emailSender = new EmailSender(
         mailHost: mailHost,
         mailPort: mailPort,
-        defaultFromAddress: defaultFromAddress,
+        fromAddress: fromAddress,
         toAddress: toAddress
     )
 
     def subject = 'Subject'
     def text = '<html><body>text</body></html>'
-
-
-    def 'sends an email given a sender, subject, and text'() {
-        given:
-        emailSender.mailSender = javaMailSender
-
-        when:
-        emailSender.send fromAddress, subject, text
-
-        then:
-        1 * javaMailSender.send(_ as MimeMessage) >> { args ->
-            isExpectedMessage args[0], fromAddress
-        }
-
-        and:
-        notThrown Exception
-    }
 
     def 'sends an email given a subject and text'() {
         given:
@@ -57,7 +39,7 @@ class EmailSenderSpec extends Specification {
 
         then:
         1 * javaMailSender.send(_ as MimeMessage) >> { args ->
-            isExpectedMessage args[0], defaultFromAddress
+            isExpectedMessage args[0], fromAddress
         }
 
         and:
@@ -73,7 +55,7 @@ class EmailSenderSpec extends Specification {
 
         then:
         1 * javaMailSender.send(_ as MimeMessage) >> { args ->
-            isExpectedMessage args[0], defaultFromAddress
+            isExpectedMessage args[0], fromAddress
             throw new MailSendException('boom')
         }
 

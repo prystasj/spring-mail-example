@@ -21,8 +21,8 @@ class EmailSender implements Sender, InitializingBean {
     /** The port of the mail host to connect to. */
     int mailPort
 
-    /** The email address to identify the sender with if one is not provided. */
-    String defaultFromAddress
+    /** The email address to identify the sender with. */
+    String fromAddress
 
     /** The email address to send emails to. */
     String toAddress
@@ -40,21 +40,8 @@ class EmailSender implements Sender, InitializingBean {
      */
     @Override
     void send(String subject, String text) {
-        send defaultFromAddress, subject, text
-    }
-
-    /**
-     * Sends an HTML text email from to a configured recipient.
-     *
-     * @param subject the subject to include in the email
-     * @param text the text to include as the email body
-     *
-     * @throws MessageException if the email attempt fails
-     */
-    @Override
-    void send(String sender, String subject, String text) {
         try {
-            mailSender.send htmlMessageWith(sender, subject, text)
+            mailSender.send htmlMessageWith(subject, text)
         }
         catch (e) {
             logFailure e
@@ -64,13 +51,13 @@ class EmailSender implements Sender, InitializingBean {
         logSent toAddress, subject, text
     }
 
-    private MimeMessage htmlMessageWith(sender, subject, text) {
+    private MimeMessage htmlMessageWith(subject, text) {
         def mimeMessage = new MimeMessage(null)
         def messageHelper = new MimeMessageHelper(mimeMessage)
 
         messageHelper.with {
             addTo toAddress
-            setFrom sender
+            setFrom fromAddress
             setSubject subject
             setText text, true
         }

@@ -5,7 +5,7 @@
 
     <!-- update the properties below before running the test -->
     <bean class="prystasj.spring.mail.EmailSender">
-        <property name="defaultFromAddress" value="prystasj@oprystasj.org"/>
+        <property name="fromAddress" value="prystasj@oprystasj.org"/>
         <property name="toAddress" value="prystasj@oprystasj.org"/>
         <property name="mailHost" value="localhost"/>
         <property name="mailPort" value="25"/>

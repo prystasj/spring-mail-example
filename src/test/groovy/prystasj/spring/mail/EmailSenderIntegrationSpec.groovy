@@ -28,13 +28,6 @@ class EmailSenderIntegrationSpec extends Specification implements InitializingBe
         notThrown MessageException
     }
 
-    def 'sends an email given a sender, subject, and HTML text'() {
-        when:
-        emailSender.send fromAddress, subject, emailText
-        then:
-        notThrown MessageException
-    }
-
     @Override
     void afterPropertiesSet() throws Exception {
         emailText = emailTextResource.file.text
