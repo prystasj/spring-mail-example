@@ -7,7 +7,7 @@ One goal is to hide the internals of configuring **Java Mail** as much as possib
 
 ## Testing
 
-An integration test can be run by activiating the `it` (integration testing) Maven profile:
+An integration test that will testing sending emails can be run by activiating the `it` (integration testing) Maven profile:
 ```
 $ mvn -Dit verify
 ```
